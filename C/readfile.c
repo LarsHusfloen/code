@@ -4,18 +4,21 @@
 #include <unistd.h>
 
 int main(){
-int fd, sz;
-char *buf = (char * ) calloc(20, sizeof(char));
-char fileName[100];
+    int fd, sz, size = 50;
+    char *buf, fileName[20];
+    buf = (char * ) calloc(size, sizeof(char)); //dynamisk minne allokering
 
-printf("Enter the file to scan: ");
-scanf("%s", fileName);
-fd = open(fileName, O_RDONLY);
-if (fd < 0) {
-	perror("feil ves lesning av fil"); exit(1);
-}
-sz = read(fd, buf, 20);
-printf("Gjorde et kall til read(%d, buf, 20). Returnerte at %d bytes ble lest.\n", fd, sz);
-printf("Bytes som ble lest var: %s\n", buf);
-close(fd);
+    printf("Enter the file to scan: ");
+    scanf("%s", fileName);
+
+    fd = open(fileName, O_RDONLY);
+    if (fd < 0) {
+	    perror("feil ved lesning av fil"); exit(1);
+    }
+
+    sz = read(fd, buf, size);
+    printf("%d bytes ble lest.\n", sz);
+    printf("Bytes som ble lest var: %s\n", buf);
+    
+    close(fd);
 }

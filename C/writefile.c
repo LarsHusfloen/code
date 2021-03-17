@@ -1,13 +1,28 @@
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int main() {
+    int size = 100;
+    char text[size], name[size];
 
-    int fd, sz;
+    printf("Enter the name and type of the new file: \n");
+    fgets(name, size, stdin);
 
-    fd = open("test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd < 0) {
-        perror("feil ved skriving av filen"); exit(1);
+    FILE * fPtr = fopen(name, "w");
+    if (fPtr == NULL){
+        printf("Unable to create file.\n");
+        fclose(fPtr);
+        exit(EXIT_FAILURE);
     }
-    sz = write(fd, "Godkjenning\0", 12);
+    
+    printf("Enter what you want in the new file: \n");
+    
+    fgets(text, size, stdin);
+    fputs(text, fPtr);
+    fclose(fPtr);
+    printf("%s, created and saved successfully.\n", name);
 
-    close(fd);
+    return 0;
+}
