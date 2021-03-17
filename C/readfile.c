@@ -5,7 +5,7 @@
 
 int main(){
     int fd, sz, size = 50;
-    char *buf, fileName[20];
+    char *buf, fileName[size];
     buf = (char * ) calloc(size, sizeof(char)); //dynamisk minne allokering
 
     printf("Enter the file to scan: ");
