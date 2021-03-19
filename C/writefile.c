@@ -1,7 +1,6 @@
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <string.h>
 
 int main() {
     int size = 100;
@@ -9,6 +8,7 @@ int main() {
 
     printf("Enter the name and type of the new file: \n");
     fgets(name, size, stdin);
+    name[strcspn(name, "\n")] = 0;
 
     FILE * fPtr = fopen(name, "w");
     if (fPtr == NULL){
